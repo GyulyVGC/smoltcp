@@ -17,4 +17,4 @@ ip link set tap0 up
 ip link set $ETH up
 ip link set br0 up
 
-sudo dhcpcd br0
+dhcpcd br0
