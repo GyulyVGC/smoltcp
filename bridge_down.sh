@@ -1,5 +1,5 @@
 #!/bin/bash
 
-killall dhcpcd
-ip link set br0 down
-brctl delbr br0
+sudo killall dhcpcd
+sudo ip link set br0 down
+sudo brctl delbr br0
