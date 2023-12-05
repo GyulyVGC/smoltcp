@@ -1,6 +1,6 @@
 #!/bin/bash
 
-ETH=ens18
+ETH=ens19
 
 modprobe bridge
 modprobe br_netfilter

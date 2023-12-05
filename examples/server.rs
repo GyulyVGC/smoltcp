@@ -11,7 +11,7 @@ use smoltcp::time::{Duration, Instant};
 use smoltcp::wire::{EthernetAddress, IpAddress, IpCidr, Ipv4Address, Ipv6Address};
 
 const MY_MAC: [u8; 6] = [0xe2, 0xe7, 0x41, 0x77, 0x25, 0x92];
-const MY_IP: [u8; 4] = [192, 168, 1, 166];
+const MY_IP: [u8; 4] = [192, 168, 1, 235];
 
 fn main() {
     utils::setup_logging("");
