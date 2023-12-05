@@ -42,9 +42,6 @@ fn main() {
         ip_addrs
             .push(IpCidr::new(IpAddress::v6(0xfdaa, 0, 0, 0, 0, 0, 0, 1), 64))
             .unwrap();
-        ip_addrs
-            .push(IpCidr::new(IpAddress::v6(0xfe80, 0, 0, 0, 0, 0, 0, 1), 64))
-            .unwrap();
     });
     iface
         .routes_mut()
