@@ -10,6 +10,9 @@ use smoltcp::socket::{tcp, udp};
 use smoltcp::time::{Duration, Instant};
 use smoltcp::wire::{EthernetAddress, IpAddress, IpCidr, Ipv4Address, Ipv6Address};
 
+const MY_MAC: [u8; 6] = [0xe2, 0xe7, 0x41, 0x77, 0x25, 0x92];
+const MY_IP: [u8; 4] = [192, 168, 1, 166];
+
 fn main() {
     utils::setup_logging("");
 
@@ -26,7 +29,7 @@ fn main() {
     // Create interface
     let mut config = match device.capabilities().medium {
         Medium::Ethernet => {
-            Config::new(EthernetAddress([0x02, 0x00, 0x00, 0x00, 0x00, 0x01]).into())
+            Config::new(EthernetAddress(MY_MAC).into())
         }
         Medium::Ip => Config::new(smoltcp::wire::HardwareAddress::Ip),
         Medium::Ieee802154 => todo!(),
@@ -37,7 +40,7 @@ fn main() {
     let mut iface = Interface::new(config, &mut device, Instant::now());
     iface.update_ip_addrs(|ip_addrs| {
         ip_addrs
-            .push(IpCidr::new(IpAddress::v4(192, 168, 1, 166), 24))
+            .push(IpCidr::new(IpAddress::v4(MY_IP[0], MY_IP[1], MY_IP[2], MY_IP[3]), 24))
             .unwrap();
         ip_addrs
             .push(IpCidr::new(IpAddress::v6(0xfdaa, 0, 0, 0, 0, 0, 0, 1), 64))
@@ -45,7 +48,7 @@ fn main() {
     });
     iface
         .routes_mut()
-        .add_default_ipv4_route(Ipv4Address::new(192, 168, 69, 100))
+        .add_default_ipv4_route(Ipv4Address::new(192, 168, 1, 1))
         .unwrap();
     iface
         .routes_mut()
